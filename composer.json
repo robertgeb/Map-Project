@@ -1,0 +1,12 @@
+{
+  "name": "Geb/Arroz",
+  "require": {
+
+  },
+  "autoload": {
+    "psr-4":{
+      "Arroz\\": ["app/lib", "app/model", "app/controller", "app/view"]
+    },
+    "files": ["app/config/config.php"]
+  }
+}
