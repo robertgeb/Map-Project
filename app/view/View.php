@@ -27,56 +27,59 @@
             }
         }
 
+
+        /**
+         * Func que identifica o tipo de dado a ser mostrado e monta o html de acordo
+         */
         public function concatenar($modo = 0)
         {
-            switch ($modo) {
+            $output['title'] = "<h1>" . $this->_data["title"] . "</h1>";
+            // NOTE: Se n houver _data[type] recebe gettype(_data[content])
+            $output['type'] = isset($this->_data["type"])?$this->_data["type"]:gettype($this->_data["content"]);
 
-                default:
-                case 0:
-                    $output['title'] = "<h1>" . $this->_data["title"] . "</h1>";
-                    $output['type'] = isset($this->_data["type"])?$this->_data["type"]:gettype($this->_data["content"]);
-                    switch ($output['type']) {
-                        case 'default':
-                        case 'string':
-                            $output['content'] = "<h4>"
-                                . str_replace("\n","<br>",$this->_data["content"])
-                                . "</h4>";
-                            break;
-                        // NOTE: Lista ordenada caso output for Array
-                        case 'array':
-                            $output['content'] = "<ol>";
-                            foreach ($this->_data['content'] as $i => $item) {
-                                $output['content'] .= "<li>"
-                                    . $item
-                                    . "</li>";
-                            }
-                            $output['content'] .= '</ol>';
-                            break;
-                        case 'table':
-                            $output['content'] = '<table class="table table-hover">';
-                            foreach ($this->_data['content'] as $i => $linha) {
-                                $output['content'] .= '<tr>';
-                                $output['content'] .= '<td>';
-                                $output['content'] .= $i+1;
-                                $output['content'] .='</td>';
-                                    foreach ($linha as $ii => $item) {
-                                        $output['content'] .= '<td>';
-                                        $output['content'] .= $item;
-                                        $output['content'] .='</td>';
-                                    }
-                                $output['content'] .= '</tr>';
-                            }
-                            $output['content'] .= '</table>';
-                            break;
-                        // NOTE: Estrutura para video caso output for um video.
-                        case 'video':
-                            $output['content'] = '<video controls preload="auto" src="'. Router::getFullOrigin($_SERVER) . DS . 'stream" width="100%"></video>';
-                            break;
-                        default:
-                            $output['content'] = '-';
-                            break;
+            switch ($output['type']) {
+                case 'default':
+                case 'string':
+                    $output['content'] = "<h4>"
+                        . str_replace("\n","<br>",$this->_data["content"])
+                        . "</h4>";
+                    break;
+
+                // NOTE: Lista ordenada caso for uma Array de dados
+                case 'array':
+                    $output['content'] = "<ol>";
+                    foreach ($this->_data['content'] as $i => $item) {
+                        $output['content'] .= "<li>"
+                            . $item
+                            . "</li>";
                     }
-                    # code...
+                    $output['content'] .= '</ol>';
+                    break;
+
+                // NOTE: Tabela
+                case 'table':
+                    $output['content'] = '<table class="table table-hover">';
+                    foreach ($this->_data['content'] as $i => $linha) {
+                        $output['content'] .= '<tr>';
+                        $output['content'] .= '<td>';
+                        $output['content'] .= $i+1;
+                        $output['content'] .='</td>';
+                            foreach ($linha as $ii => $item) {
+                                $output['content'] .= '<td>';
+                                $output['content'] .= $item;
+                                $output['content'] .='</td>';
+                            }
+                        $output['content'] .= '</tr>';
+                    }
+                    $output['content'] .= '</table>';
+                    break;
+                    
+                // NOTE: Estrutura para video caso output for um video.
+                case 'video':
+                    $output['content'] = '<video controls preload="auto" src="'. Router::getFullOrigin($_SERVER) . DS . 'stream" width="100%"></video>';
+                    break;
+                default:
+                    $output['content'] = '-';
                     break;
             }
 
