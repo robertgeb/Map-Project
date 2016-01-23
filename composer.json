@@ -1,11 +1,11 @@
 {
-  "name": "Geb/Arroz",
+  "name": "Yudi/BreakCheck",
   "require": {
 
   },
   "autoload": {
-    "psr-4":{
-      "Arroz\\": ["app/lib", "app/model", "app/controller", "app/view"]
+    "psr-0":{
+      "BreakCheck\\": ["app/lib", "app/model", "app/controller", "app/view"]
     },
     "files": ["app/config/config.php"]
   }

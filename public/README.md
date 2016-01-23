@@ -1,2 +1,0 @@
-# appphp
-Estrutura MVC php

@@ -1,4 +1,5 @@
 <?php
+    namespace BreakCheck;
     /**
      * Gerencia a saida de dados para visualização
      */
@@ -69,7 +70,7 @@
                             break;
                         // NOTE: Estrutura para video caso output for um video.
                         case 'video':
-                            $output['content'] = '<video controls preload="auto" src="'. Arroz\Router::getFullOrigin($_SERVER) . DS . 'stream" width="100%"></video>';
+                            $output['content'] = '<video controls preload="auto" src="'. Router::getFullOrigin($_SERVER) . DS . 'stream" width="100%"></video>';
                             break;
                         default:
                             $output['content'] = '-';

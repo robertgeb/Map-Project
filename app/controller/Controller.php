@@ -1,4 +1,5 @@
 <?php
+    namespace BreakCheck;
     /**
      * Controller :D
      */

@@ -1,4 +1,6 @@
 <?php
+    namespace BreakCheck;
+
     class Router {
 
     private static $urlRoot = "http://localhost";
