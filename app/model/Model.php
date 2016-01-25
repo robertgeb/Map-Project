@@ -1,4 +1,5 @@
 <?php
+    namespace BreakCheck;
     interface Model
     {
             public function index();

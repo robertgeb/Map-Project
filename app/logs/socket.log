@@ -1,0 +1,7 @@
+[Sun, 24 Jan 2016 16:25:25 +0000] Class 'BreakCheck\BreakCheck\Logger' not found[Sun, 24 Jan 2016 18:36:52 +0000] Class 'BreakCheck\SocketControllesr' not found[Sun, 24 Jan 2016 18:37:41 +0000] Class 'BreakCheck\SocketControllesr' not found
+[Sun, 24 Jan 2016 18:38:12 +0000] Class 'BreakCheck\SocketControllesr' not found
+[Sun, 24 Jan 2016 18:38:21 +0000] Class 'BreakCheck\SocketControllesr' not found
+[Mon, 25 Jan 2016 01:31:36 +0000] Argument 2 passed to BreakCheck\SocketController::__construct() must be of the type string, null given, called in /root/projects/Break Check/app/scripts/SocketServer.php on line 34
+[Mon, 25 Jan 2016 03:03:26 +0000] Argument 2 passed to BreakCheck\SocketController::__construct() must be of the type string, null given, called in /root/projects/Break Check/app/scripts/SocketServer.php on line 36
+[Mon, 25 Jan 2016 03:03:27 +0000] Argument 2 passed to BreakCheck\SocketController::__construct() must be of the type string, null given, called in /root/projects/Break Check/app/scripts/SocketServer.php on line 36
+[Mon, 25 Jan 2016 03:03:30 +0000] Argument 2 passed to BreakCheck\SocketController::__construct() must be of the type string, null given, called in /root/projects/Break Check/app/scripts/SocketServer.php on line 36

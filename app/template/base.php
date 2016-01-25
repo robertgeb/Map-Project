@@ -4,22 +4,23 @@
   <meta charset=utf-8>
   <title>Break Check</title>
   <meta name=viewport content="width=device-width, initial-scale=1">
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel=stylesheet type=text/css href=/public/fonts/font-awesome.min.css>
   <link rel=stylesheet href=/public/css/normalize.css>
   <link rel=stylesheet href=/public/css/skeleton.css>
   <link rel=stylesheet href=/public/css/style.css>
 </head>
 <body>
+    <?php echo $output['title'] ?>
   <div class=section>
       <div class=container>
-          <div class="row">
+          <div class=row>
               <div class="eight columns">
                   <div id=map>
 
                   </div>
               </div>
               <div class="four columns">
-                  10/10
+                  <h4>Rio de janeiro, <small>RJ</small></h4>
               </div>
           </div>
       </div>
