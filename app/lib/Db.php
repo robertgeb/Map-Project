@@ -54,6 +54,7 @@ class Db
             $result[$i]['lon'] = (float) array_shift($ponto);
             $result[$i]['nome'] = array_shift($ponto);
         }
+        self::$db = NUL;
         return $result;
     }
 

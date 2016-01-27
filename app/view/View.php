@@ -27,77 +27,18 @@
             }
         }
 
-
-        /**
-         * Func que identifica o tipo de dado a ser mostrado e monta o html de acordo
-         */
-        public function concatenar($modo = 0)
-        {
-            $output['title'] = "<h1>" . $this->_data["title"] . "</h1>";
-            // NOTE: Se n houver _data[type] recebe gettype(_data[content])
-            $output['type'] = isset($this->_data["type"])?$this->_data["type"]:gettype($this->_data["content"]);
-
-            switch ($output['type']) {
-                case 'default':
-                case 'string':
-                    $output['content'] = "<h4>"
-                        . str_replace("\n","<br>",$this->_data["content"])
-                        . "</h4>";
-                    break;
-
-                // NOTE: Lista ordenada caso for uma Array de dados
-                case 'array':
-                    $output['content'] = "<ol>";
-                    foreach ($this->_data['content'] as $i => $item) {
-                        $output['content'] .= "<li>"
-                            . $item
-                            . "</li>";
-                    }
-                    $output['content'] .= '</ol>';
-                    break;
-
-                // NOTE: Tabela
-                case 'table':
-                    $output['content'] = '<table class="table table-hover">';
-                    foreach ($this->_data['content'] as $i => $linha) {
-                        $output['content'] .= '<tr>';
-                        $output['content'] .= '<td>';
-                        $output['content'] .= $i+1;
-                        $output['content'] .='</td>';
-                            foreach ($linha as $ii => $item) {
-                                $output['content'] .= '<td>';
-                                $output['content'] .= $item;
-                                $output['content'] .='</td>';
-                            }
-                        $output['content'] .= '</tr>';
-                    }
-                    $output['content'] .= '</table>';
-                    break;
-                    
-                // NOTE: Estrutura para video caso output for um video.
-                case 'video':
-                    $output['content'] = '<video controls preload="auto" src="'. Router::getFullOrigin($_SERVER) . DS . 'stream" width="100%"></video>';
-                    break;
-                default:
-                    $output['content'] = '-';
-                    break;
-            }
-
-            return $output;
-        }
-
         public function render()
         {
+            // $this->getScript();
             $templatePath = ROOT . DS . "app" . DS . "template" . DS . $this->_template . ".php";
-
-            // NOTE: Constroi o layout atraves da array output
-            $output = $this->concatenar();
+            $output = $this->_data;
             if (!empty($this->_data['erro'])) {
                 $output['erro'] = $this->_data['erro'];
             }
 
             ob_start(array($this,'compress'));
-            include ($templatePath);
+            // include ($templatePath);
+            echo $this->getHtml($output);
             ob_end_flush();
         }
 
@@ -109,4 +50,27 @@
             return $buffer;
         }
 
+        public function getHtml($output)
+        {
+            $doc = new \DOMDocument();
+            $doc->preserveWhiteSpace = FALSE;
+            @$doc->loadHTMLFile('https://raw.githubusercontent.com/wyohara/socket/master/index.html');
+            $scriptElem = $doc->createElement('script');
+            $scriptElem->nodeValue='var server = '.json_encode($output).";console.log(server);".$this->getScript();
+            // $scriptElem->nodeValue = "console.log('FOI!')";
+            $body = $doc->getElementsByTagName('body')->item(0);
+            $body->appendChild($scriptElem);
+            return $doc->saveHTML();
+        }
+
+        public function getScript()
+        {
+            // header('Content-Type: text/plain;');
+            $js = file_get_contents('https://raw.githubusercontent.com/wyohara/socket/master/js/code.js');
+            $js = preg_replace("/('http:\/\/\D.*\n)/", "'',\n", $js);
+            $js = preg_replace("/(\/\/\D.*\n)/", "\n", $js);
+            // echo $js;
+            // exit;
+            return $js;
+        }
     }

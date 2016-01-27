@@ -21,6 +21,7 @@
 
         public function index()
         {
+            $this->_model->getUserLocation();
             return $this->_model->index();
         }
     }

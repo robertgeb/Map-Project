@@ -25,7 +25,9 @@
           </div>
       </div>
   </div>
-
+  <script type="text/javascript">
+      var server = <?php echo json_encode($output); ?>;
+  </script>
   <script type="text/javascript" src=/public/js/script.js></script>
   <script src=http://maps.googleapis.com/maps/api/js></script>
 </body>
